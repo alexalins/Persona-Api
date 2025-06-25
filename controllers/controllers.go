@@ -23,3 +23,10 @@ func GetPersonaById(w http.ResponseWriter, r *http.Request) {
 	database.DB.First(&persona, id)
 	json.NewEncoder(w).Encode(persona)
 }
+
+func CreatePersona(w http.ResponseWriter, r *http.Request) {
+	var newPersona models.Persona
+	json.NewDecoder(r.Body).Decode(&newPersona)
+	database.DB.Create(&newPersona)
+	json.NewEncoder(w).Encode(newPersona)
+}
