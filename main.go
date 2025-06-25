@@ -1,14 +1,13 @@
 package main
 
 import (
-	"api-persona/mocks"
-	"api-persona/models"
+	"api-persona/database"
 	"api-persona/routes"
 	"fmt"
 )
 
 func main() {
-	models.Personas = mocks.MockPersonas()
+	database.InitDatabase()
 	fmt.Println("Iniciando servidor...")
 	routes.HandleRequest()
 }

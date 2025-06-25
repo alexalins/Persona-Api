@@ -1,32 +1,25 @@
 package controllers
 
 import (
+	"api-persona/database"
 	"api-persona/models"
 	"encoding/json"
-	"fmt"
 	"net/http"
-	"strconv"
 
 	"github.com/gorilla/mux"
 )
 
-func Home(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "Home Page")
-}
-
 func GetAllPersonas(w http.ResponseWriter, r *http.Request) {
-	json.NewEncoder(w).Encode(models.Personas)
+	var p []models.Persona
+	database.DB.Find(&p)
+	json.NewEncoder(w).Encode(p)
 }
 
 func GetPersonaById(w http.ResponseWriter, r *http.Request) {
-	//pegando dados da request
 	vars := mux.Vars(r)
 	id := vars["id"]
+	var persona models.Persona
 
-	//procurando dados
-	for _, persona := range models.Personas {
-		if strconv.Itoa(persona.Id) == id {
-			json.NewEncoder(w).Encode(persona)
-		}
-	}
+	database.DB.First(&persona, id)
+	json.NewEncoder(w).Encode(persona)
 }

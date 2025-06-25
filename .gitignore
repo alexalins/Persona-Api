@@ -30,3 +30,7 @@ Gopkg.toml
 # Arquivos do sistema
 .DS_Store
 Thumbs.db
+
+
+# Diretórios e arquivos do postres-data
+postgres-data/
