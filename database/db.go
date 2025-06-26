@@ -12,7 +12,7 @@ var DB *gorm.DB
 
 func InitDatabase() {
 	var err error
-	connectValue := "host=localhost user=root password=root dbname=root port=5432 sslmode=disable"
+	connectValue := "host=postgres user=root password=root dbname=root port=5432 sslmode=disable TimeZone=America/Sao_Paulo"
 	DB, err = gorm.Open(postgres.Open(connectValue))
 	if err != nil {
 		log.Fatal("Erro ao conectar com o banco:", err)
